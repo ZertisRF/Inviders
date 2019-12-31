@@ -3,7 +3,7 @@ import time
 
 from Inviders.GameParams import GameParams
 from Inviders.fly_objects.SpaceShip import SpaceShip
-from Inviders.fly_objects.Enemy_1 import Enemy_1
+from Inviders.painter.Painter import Painter
 
 pygame.init()
 gameParams = GameParams()
@@ -40,16 +40,12 @@ def destroy():
 def game():
     x = (gameParams.getWight() * 0.45)
     y = (gameParams.getHeight() * 0.8)
-    x_enemy_1 = (gameParams.getWight() * 0.45)
-    y_enemy_1 = 0
     spaceShip = SpaceShip(x, y, pygame, gameDisplay, gameParams)
-    enemy_1 = Enemy_1(x_enemy_1, y_enemy_1, pygame, gameDisplay, gameParams)
     Exit = False
     x_c = 0
     y_c = 0
-    x_c_enemy_1 = 0
-    y_c_enemy_1 = 0
-    Life_emeny_1 = True
+    from Inviders.contents.pilot.pilot import getPilotContent
+    painter = Painter(time.time(), getPilotContent(pygame, gameDisplay, gameParams))
     while not Exit:
         for event in pygame.event.get():
             gameDisplay.fill(colour_white)
@@ -71,13 +67,10 @@ def game():
                         or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     x_c = 0
                     y_c = 0
-            if Life_emeny_1 == True:
-                y_c_enemy_1 += 1
         gameDisplay.fill(colour_white)
         spaceShip.changeCoord(x_c, y_c)
-        spaceShip.display()
-        enemy_1.changeCoord(x_c_enemy_1, y_c_enemy_1)
-        enemy_1.display()
+        spaceShip.display((spaceShip.get_x(), spaceShip.get_y()))
+        painter.draw(time.time())
         pygame.display.update()
         clock.tick(60)
 

@@ -1,3 +1,6 @@
+'''
+Здесь храниться информация о параметрах игры
+'''
 class GameParams:
     def __init__(self):
         self.wight = None
