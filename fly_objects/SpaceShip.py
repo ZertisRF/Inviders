@@ -1,3 +1,6 @@
+'''
+Создает корабль игрока, следит за тем, чтобы тот не вылетал за края игрового поля
+'''
 from Inviders.fly_objects.BaseFlyObject import BaseFlyObject
 
 
@@ -30,5 +33,7 @@ class SpaceShip(BaseFlyObject):
                 self.x = 0
             else:
                 self.x += x_c
-        else:
-            self.x -= x_c
+        elif self.x > self.gameParams.getWight() - 80:
+            self.x -= 20
+        elif self.x >= 0:
+            self.x += 10

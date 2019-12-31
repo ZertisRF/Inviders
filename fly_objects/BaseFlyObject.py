@@ -1,3 +1,6 @@
+"""
+Создает базовый класс для всех летающих объектов
+"""
 class BaseFlyObject:
     def __init__(self, x, y, pygame, gameDisplay, gameParams):
         self.x = x
@@ -20,14 +23,12 @@ class BaseFlyObject:
     def event(self, event):
         self.event = event
 
-    def display(self):
-        self.gameDisplay.blit(self.image, (self.x, self.y))
+    def display(self, coords):
+        self.gameDisplay.blit(self.image, coords)
 
     def changeCoord(self, x_c, y_c):
         self.x += x_c
         self.y += y_c
 
-    #def checkDestroy(self):
-
-
-
+    def desroyed(self):
+        return False
