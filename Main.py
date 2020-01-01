@@ -4,6 +4,7 @@ import time
 from Inviders.GameParams import GameParams
 from Inviders.fly_objects.SpaceShip import SpaceShip
 from Inviders.painter.Painter import Painter
+from Inviders.contents.pilot.pilot import getPilotContent
 
 pygame.init()
 gameParams = GameParams()
@@ -44,7 +45,6 @@ def game():
     Exit = False
     x_c = 0
     y_c = 0
-    from Inviders.contents.pilot.pilot import getPilotContent
     painter = Painter(time.time(), getPilotContent(pygame, gameDisplay, gameParams))
     while not Exit:
         for event in pygame.event.get():
@@ -71,6 +71,7 @@ def game():
         spaceShip.changeCoord(x_c, y_c)
         spaceShip.display((spaceShip.get_x(), spaceShip.get_y()))
         painter.draw(time.time())
+        painter.clearContent()
         pygame.display.update()
         clock.tick(60)
 
