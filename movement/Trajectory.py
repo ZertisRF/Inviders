@@ -15,8 +15,8 @@ class Trajectory:
             if not movement.ended():
                 self.coords = movement.calculate(self.coords, self.incr)
                 return self.coords
-        self.Ended = True
-        return False
+            else:
+                continue
 
     def setCoords(self, x, y):
         self.coords[0] = x
@@ -34,7 +34,11 @@ class Trajectory:
         return self.coords
 
     def notEnded(self):
+        if len(self.movements) > 0:
+            self.Ended = self.movements[len(self.movements)-1].ended()
         return not self.Ended
 
     def ended(self):
+        if len(self.movements) > 0:
+            self.Ended = self.movements[len(self.movements)-1].ended()
         return self.Ended

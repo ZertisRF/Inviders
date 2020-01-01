@@ -7,20 +7,17 @@ class Conduct:
         self.isLive = True
 
     def getCoords(self):
-        coords = None
         for trajectory in self.trajectories:
-            if trajectory.ended():
-                 coords = trajectory.getEndCoords()
-                 self.isAlive = False
-            elif coords:
-                trajectory.setBeginCoords(coords)
-                self.isAlive = True
+            if not trajectory.ended():
+                self.isLive = True
                 return trajectory.getNewCoords()
             else:
-                return trajectory.getNewCoords()
+                continue
 
     def isAlive(self):
+        self.isLive = not self.trajectories[len(self.trajectories)-1].ended()
         return self.isLive
 
     def ended(self):
+        self.isLive = not self.trajectories[len(self.trajectories)-1].ended()
         return not self.isLive

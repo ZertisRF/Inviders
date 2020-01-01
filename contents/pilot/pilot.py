@@ -11,9 +11,15 @@ from Inviders.movement.Trajectory import Trajectory
 def getPilotContent(pygame, gameDisplay, gameParams):
     enemy = Enemy_1(pygame, gameDisplay, gameParams)
     lineM = LineMovement(90, 300)
+    lineM2 = LineMovement(45, 300)
+    lineM3 = LineMovement(270, 300)
+    lineM4 = LineMovement(0, 300)
     movements = []
     movements.append(lineM)
-    trajectory = Trajectory(gameParams, movements, (gameParams.getWight() // 2,-50))
+    movements.append(lineM2)
+    movements.append(lineM3)
+    movements.append(lineM4)
+    trajectory = Trajectory(gameParams, movements, (gameParams.getWight() // 2,-50), incr=3)
     trajectories = []
     trajectories.append(trajectory)
     conduct = Conduct(trajectories)

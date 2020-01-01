@@ -23,8 +23,10 @@ class SpaceShip(BaseFlyObject):
                 self.y = 0
             else:
                 self.y += y_c
-        else:
-            self.y -= y_c
+        elif self.y > self.gameParams.getHeight() - 80:
+            self.y -= 20
+        elif self.y >= 0:
+            self.y += 10
         if self.x < self.gameParams.getWight() - 50 and self.x > 0:
             change = self.x + x_c
             if change > self.gameParams.getWight() - 50:

@@ -12,10 +12,14 @@ class LineMovement:
 
     def calculate(self, coords, incr):
         self.startLength += abs(incr)
-        self.x = math.cos(self.alpha) * incr
-        self.y = math.sin(self.alpha) * incr
-        return coords[0] + self.x, coords[1] + self.y
+        self.x = math.cos(math.radians(self.alpha)) * incr
+        self.y = math.sin(math.radians(self.alpha)) * incr
+        self.coords = coords[0] + self.x, coords[1] + self.y
+        return self.coords
 
     def ended(self):
         return self.startLength > self.length
+
+    def getEndCoords(self):
+        return self.coords
 
