@@ -1,5 +1,6 @@
 import pygame
 import time
+import os
 
 from Inviders.GameParams import GameParams
 from Inviders.fly_objects.SpaceShip import SpaceShip
@@ -17,6 +18,27 @@ gameDisplay = pygame.display.set_mode((gameParams.getWight(), gameParams.getHeig
 pygame.display.set_caption('Space_Race')
 clock = pygame.time.Clock()
 space_w = 50
+width, height = 600, 800
+
+
+def load_image(name, color_key=None):
+    fullname = os.path.join('data', name)
+    try:
+        image = pygame.image.load(fullname).convert()
+    except pygame.error as message:
+        print('Cannot load image:', name)
+        raise SystemExit(message)
+
+    if color_key is not None:
+        if color_key == -1:
+            color_key = image.get_at((0, 0))
+        image.set_colorkey(color_key)
+    else:
+        image = image.convert_alpha()
+    return image
+
+
+background = pygame.transform.scale(load_image('background.jpg'), (width, height))
 
 
 def text_objects(text, font):
