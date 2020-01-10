@@ -1,8 +1,8 @@
 '''
 Создает корабль игрока, следит за тем, чтобы тот не вылетал за края игрового поля
 '''
-from Inviders.fly_objects.BaseFlyObject import BaseFlyObject
-
+#from Inviders.fly_objects.BaseFlyObject import BaseFlyObject
+from fly_objects.BaseFlyObject import BaseFlyObject
 
 class SpaceShip(BaseFlyObject):
     life = 100

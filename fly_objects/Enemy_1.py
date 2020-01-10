@@ -1,7 +1,8 @@
 '''
 Класс, хранящий в себе информацию о противнике
 '''
-from Inviders.fly_objects.BaseFlyObject import BaseFlyObject
+#from Inviders.fly_objects.BaseFlyObject import BaseFlyObject
+from fly_objects.BaseFlyObject import BaseFlyObject
 
 
 class Enemy_1(BaseFlyObject):
