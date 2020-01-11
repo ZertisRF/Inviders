@@ -2,10 +2,6 @@ import pygame
 import time
 import os
 
-#from Inviders.GameParams import GameParams
-#from Inviders.fly_objects.SpaceShip import SpaceShip
-#from Inviders.painter.Painter import Painter
-#from Inviders.contents.pilot.pilot import getPilotContent
 from GameParams import GameParams
 from fly_objects.SpaceShip import SpaceShip
 from painter.Painter import Painter
@@ -42,14 +38,15 @@ def load_image(name, color_key=None):
     return image
 
 
-#background = pygame.transform.scale(load_image('background.jpg'), (width, height))
 fon = pygame.sprite.Group()
 background = pygame.sprite.Sprite()
 background.image = load_image("background.jpg")
+background = pygame.transform.scale(load_image('background.jpg'), (width, height))
 background.rect = background.image.get_rect()
 background.rect.x = 0
 background.rect.y = 0
 fon.add(background)
+
 
 def text_objects(text, font):
     textSurf = font.render(text, True, colour_black)
@@ -99,7 +96,6 @@ def game():
                         or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     x_c = 0
                     y_c = 0
-        #gameDisplay.fill(colour_white)
         fon.draw(gameDisplay)
         spaceShip.changeCoord(x_c, y_c)
         spaceShip.display((spaceShip.get_x(), spaceShip.get_y()))
