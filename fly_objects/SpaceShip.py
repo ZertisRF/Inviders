@@ -33,6 +33,9 @@ class SpaceShip(BaseFlyObject):
         self.image = load_image('player.png', -1)
         self.image = pygame.transform.scale(self.image, (70, 70))
         self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.x_c = 0
+        self.y_c = 0
 
     def checkDestroy(self):
         return self.life <= 0
@@ -66,8 +69,21 @@ class SpaceShip(BaseFlyObject):
     def destroy(self):
         self.image = pygame.image.load('fly_objects/boom.png')
 
-    # столкновение с врагом
-    def update(self):
+    def update(self, type, key):
+        '''
         if pygame.sprite.collide_mask(self, Enemy_1):
             self.life -= 10
             print(-10)
+        '''
+        if type == pygame.KEYDOWN:
+            if key == pygame.K_LEFT:
+                self.x_c -= 5
+            if key == pygame.K_RIGHT:
+                self.x_c += 5
+            if key == pygame.K_UP:
+                self.y_c -= 5
+            if key == pygame.K_DOWN:
+                self.y_c += 5
+        if type == pygame.KEYUP:
+            self.x_c = 0
+            self.y_c = 0

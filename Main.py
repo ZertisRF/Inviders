@@ -72,6 +72,19 @@ def start_screen():
         pygame.display.flip()
         clock.tick(FPS)
 
+class Camera:
+    def __init__(self):
+        self.dx = 0
+        self.dy = 0
+
+    def apply(self, obj):
+        obj.rect.x += self.dx
+        obj.rect.y += self.dy
+
+    def update(self, target):
+        self.dx = -(target.rect.x + target.rect.w // 2 - width // 2)
+        self.dy = -(target.rect.y + target.rect.h // 2 - height // 2)
+
 
 fon = pygame.sprite.Group()
 background = pygame.sprite.Sprite()
@@ -81,7 +94,7 @@ background.rect.x = 0
 background.rect.y = 0
 fon.add(background)
 
-
+'''
 def text_objects(text, font):
     textSurf = font.render(text, True, colour_black)
     return textSurf, textSurf.get_rect()
@@ -99,46 +112,34 @@ def m_display(text):
 
 def destroy():
     m_display('Your spaceship destroyed!')
+'''
 
-
-def game():
-    x = (gameParams.getWidth() * 0.45)
-    y = (gameParams.getHeight() * 0.8)
-    spaceShip = SpaceShip(x, y, pygame, gameDisplay, gameParams)
-    running = True
-    x_c = 0
-    y_c = 0
-    painter = Painter(time.time(), getPilotContent(pygame, gameDisplay, gameParams))
-    start_screen()
-    while running:
-        for event in pygame.event.get():
-            gameDisplay.fill(colour_white)
-            if event.type == pygame.QUIT:
-                running = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    x_c += -5
-                elif event.key == pygame.K_RIGHT:
-                    x_c += 5
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    y_c -= 5
-                elif event.key == pygame.K_DOWN:
-                    y_c += 5
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT \
-                        or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    x_c = 0
-                    y_c = 0
-        fon.draw(gameDisplay)
-        spaceShip.changeCoord(x_c, y_c)
-        spaceShip.display((spaceShip.get_x(), spaceShip.get_y()))
-        painter.draw(time.time())
-        painter.clearContent()
-        pygame.display.update()
-        clock.tick(60)
-
-
-game()
+x = (gameParams.getWidth() * 0.45)
+y = (gameParams.getHeight() * 0.8)
+player = SpaceShip(x, y, pygame, gameDisplay, gameParams)
+running = True
+painter = Painter(time.time(), getPilotContent(pygame, gameDisplay, gameParams))
+start_screen()
+camera = Camera()
+while running:
+    for event in pygame.event.get():
+        gameDisplay.fill(colour_white)
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            player.update(event.type, event.key)
+        if event.type == pygame.KEYUP:
+            player.update(event.type, event.key)
+    camera.update(player)
+    '''
+    for sprite in all_sprites:
+        camera.apply(sprite)
+     '''
+    fon.draw(gameDisplay)
+    player.changeCoord(player.x_c, player.y_c)
+    player.display((player.get_x(), player.get_y()))
+    painter.draw(time.time())
+    painter.clearContent()
+    pygame.display.update()
+    clock.tick(60)
 pygame.quit()
-quit()
