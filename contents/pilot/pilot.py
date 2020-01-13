@@ -1,11 +1,6 @@
 '''
 Рисует полет противника по заданным траекториям
 '''
-#from Inviders.contents.Content import Content
-#from Inviders.fly_objects.Enemy_1 import Enemy_1
-#from Inviders.movement.Conduct import Conduct
-#from Inviders.movement.LineMovement import LineMovement
-#from Inviders.movement.Trajectory import Trajectory
 from contents.Content import Content
 from fly_objects.Enemy_1 import Enemy_1
 from movement.Conduct import Conduct
@@ -24,7 +19,7 @@ def getPilotContent(pygame, gameDisplay, gameParams):
     movements.append(lineM2)
     movements.append(lineM3)
     movements.append(lineM4)
-    trajectory = Trajectory(gameParams, movements, (gameParams.getWight() // 2,-50), incr=3)
+    trajectory = Trajectory(gameParams, movements, (gameParams.getWidth() // 2,-50), incr=3)
     trajectories = []
     trajectories.append(trajectory)
     conduct = Conduct(trajectories)
