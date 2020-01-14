@@ -3,9 +3,11 @@
 '''
 
 from fly_objects.BaseFlyObject import BaseFlyObject
-from fly_objects.Enemy_1 import Enemy_1
+from Main import player, game_over, weapon_group, all_sprites
+from Enemy_1 import Enemy_list
 import os
 import pygame
+width, height = 800, 600
 
 
 def load_image(name, color_key=None):
@@ -26,8 +28,6 @@ def load_image(name, color_key=None):
 
 
 class SpaceShip(BaseFlyObject):
-    life = 100
-
     def __init__(self, x, y, pygame, gameDisplay, gameParams):
         super().__init__(x, y, pygame, gameDisplay, gameParams)
         self.image = load_image('player.png', -1)
@@ -36,6 +36,7 @@ class SpaceShip(BaseFlyObject):
         self.rect = self.image.get_rect()
         self.x_c = 0
         self.y_c = 0
+        self.life = 3
 
     def checkDestroy(self):
         return self.life <= 0
@@ -66,15 +67,17 @@ class SpaceShip(BaseFlyObject):
         elif self.x >= 0:
             self.x += 10
 
-    def destroy(self):
-        self.image = pygame.image.load('fly_objects/boom.png')
+    def shoot(self):
+        if self.weapon.available is False:
+            self.weapon = Weapon(self.x, self.y)
+
+    def damage(self):
+        self.life -= 1
+        if self.checkDestroy == 0:
+            self.image = load_image('boom', -1)
+            game_over()
 
     def update(self, type, key):
-        '''
-        if pygame.sprite.collide_mask(self, Enemy_1):
-            self.life -= 10
-            print(-10)
-        '''
         if type == pygame.KEYDOWN:
             if key == pygame.K_LEFT:
                 self.x_c -= 5
@@ -84,6 +87,28 @@ class SpaceShip(BaseFlyObject):
                 self.y_c -= 5
             if key == pygame.K_DOWN:
                 self.y_c += 5
+            if key == pygame.K_SPACE:
+                self.shoot()
         if type == pygame.KEYUP:
             self.x_c = 0
             self.y_c = 0
+
+
+class Weapon(pygame.sprite.Sprite):
+    def __init__(self, pos_x, pos_y):
+        super().__init__(weapon_group, all_sprites)
+        self.image = load_image('ball', -1)
+        self.image = pygame.transform.scale(self.image, (15, 15))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect().move(15 * pos_x, 15 * pos_y)
+        self.available = True
+
+    def update(self):
+        if self.available:
+            for enemy in Enemy_list:
+                if not pygame.sprite.collide_mask(self, enemy):
+                    self.rect = self.rect.move(0, 1)
+                    if (self.rect[0] > width or self.rect[0] < 0) and (self.rect[1] > height or self.rect[1] < 0):
+                        self.available = False
+                else:
+                    player.damage()

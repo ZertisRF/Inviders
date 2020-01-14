@@ -72,6 +72,11 @@ def start_screen():
         pygame.display.flip()
         clock.tick(FPS)
 
+
+def game_over():
+    pass
+
+
 class Camera:
     def __init__(self):
         self.dx = 0
@@ -93,6 +98,8 @@ background.rect = background.image.get_rect()
 background.rect.x = 0
 background.rect.y = 0
 fon.add(background)
+all_sprites = pygame.sprite.Group()
+weapon_group = pygame.sprite.Group()
 
 '''
 def text_objects(text, font):
