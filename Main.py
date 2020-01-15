@@ -6,7 +6,7 @@ import sys
 from GameParams import GameParams
 from fly_objects.SpaceShip import SpaceShip
 from painter.Painter import Painter
-from contents.pilot.pilot import getPilotContent
+from contents.pilot.FirstStage import FirstStage
 
 pygame.init()
 gameParams = GameParams()
@@ -125,7 +125,8 @@ x = (gameParams.getWidth() * 0.45)
 y = (gameParams.getHeight() * 0.8)
 player = SpaceShip(x, y, pygame, gameDisplay, gameParams)
 running = True
-painter = Painter(time.time(), getPilotContent(pygame, gameDisplay, gameParams))
+firstStage = FirstStage(pygame, gameDisplay, gameParams)
+painter = Painter(time.time(), firstStage.loadStageContent())
 start_screen()
 camera = Camera()
 while running:
