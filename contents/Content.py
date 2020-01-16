@@ -21,3 +21,12 @@ class Content:
 
     def ended(self):
         return self.flyObject.desroyed() or self.conduct.ended()
+
+    def notEnded(self):
+        return not self.ended()
+
+    def getFlyObject(self):
+        return self.flyObject
+
+    def getCoords(self):
+        return self.conduct.getCurrentCoords()

@@ -36,6 +36,9 @@ class SpaceShip(BaseFlyObject):
         self.rect = self.image.get_rect()
         self.x_c = 0
         self.y_c = 0
+        self.type = 'friend'
+        self.wight = 70
+        self.height = 70
         self.life = 3
 
     def checkDestroy(self):
