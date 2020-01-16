@@ -32,6 +32,9 @@ class Enemy_1(BaseFlyObject):
         self.image = load_image('enemy.png', -1)
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.mask = pygame.mask.from_surface(self.image)
+        self.type = 'enemy'
+        self.wight = 50
+        self.height = 50
 
     def checkDestroy(self):
         return self.life <= 0

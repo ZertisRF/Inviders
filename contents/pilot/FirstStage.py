@@ -13,7 +13,6 @@ class FirstStage:
         self.gameParams = gameParams
         self.gameDisplay = gameDisplay
 
-
     def loadStageContent(self):
         contents = []
         for i in range(5, 35, 5):
@@ -22,24 +21,20 @@ class FirstStage:
             contents.append(self.getContent('Base_enemy', 'Right_movement', i))
         return contents
 
-
     def getContent(self, enemyName, conductName, time):
         enemy = self.getEnemy(enemyName)
         conduct = self.getConduct(conductName)
         return Content(enemy, conduct, time)
 
-
     def getEnemy(self, enemyName):
         if enemyName == 'Base_enemy':
             return Enemy_1(self.pygame, self.gameDisplay, self.gameParams)
-
 
     def getConduct(self, conductName):
         if conductName == 'Left_movement':
             return Conduct(self.getLeftTrajectories())
         elif conductName == 'Right_movement':
             return Conduct(self.getRightTrajectories())
-
 
     def getLeftTrajectories(self):
         lineM = LineMovement(random.randrange(75, 100), 250)
@@ -55,7 +50,6 @@ class FirstStage:
         trajectories = []
         trajectories.append(trajectory)
         return trajectories
-
 
     def getRightTrajectories(self):
         lineM = LineMovement(random.randrange(75, 100), 250)

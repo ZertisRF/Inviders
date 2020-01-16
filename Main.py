@@ -7,6 +7,7 @@ from GameParams import GameParams
 from fly_objects.SpaceShip import SpaceShip
 from painter.Painter import Painter
 from contents.pilot.FirstStage import FirstStage
+from contents.ContentManager import ContentManager
 
 pygame.init()
 gameParams = GameParams()
@@ -119,7 +120,9 @@ y = (gameParams.getHeight() * 0.8)
 player = SpaceShip(x, y, pygame, gameDisplay, gameParams)
 running = True
 firstStage = FirstStage(pygame, gameDisplay, gameParams)
-painter = Painter(time.time(), firstStage.loadStageContent())
+contentManager = ContentManager()
+contentManager.setContents(firstStage.loadStageContent())
+painter = Painter(time.time(), contentManager.getContent())
 start_screen()
 camera = Camera()
 while running:
@@ -140,7 +143,7 @@ while running:
     player.changeCoord(player.x_c, player.y_c)
     player.display((player.get_x(), player.get_y()))
     painter.draw(time.time())
-    painter.clearContent()
+    contentManager.clearContent()
     pygame.display.update()
     clock.tick(60)
 pygame.quit()

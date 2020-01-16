@@ -9,6 +9,9 @@ class BaseFlyObject:
         self.gameDisplay = gameDisplay
         self.gameParams = gameParams
         self.image = None
+        self.wight = None
+        self.height = None
+        self.type = None
 
     def update(self, x, y):
         self.x = x
@@ -32,3 +35,9 @@ class BaseFlyObject:
 
     def desroyed(self):
         return False
+
+    def getSize(self):
+        return self.wight, self.height
+
+    def getType(self):
+        return self.type
