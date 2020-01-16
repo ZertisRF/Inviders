@@ -73,25 +73,6 @@ def start_screen():
         pygame.display.flip()
         clock.tick(FPS)
 
-
-def game_over():
-    pass
-
-
-class Camera:
-    def __init__(self):
-        self.dx = 0
-        self.dy = 0
-
-    def apply(self, obj):
-        obj.rect.x += self.dx
-        obj.rect.y += self.dy
-
-    def update(self, target):
-        self.dx = -(target.rect.x + target.rect.w // 2 - width // 2)
-        self.dy = -(target.rect.y + target.rect.h // 2 - height // 2)
-
-
 fon = pygame.sprite.Group()
 background = pygame.sprite.Sprite()
 background.image = load_image("background.jpg")
@@ -102,26 +83,6 @@ fon.add(background)
 all_sprites = pygame.sprite.Group()
 weapon_group = pygame.sprite.Group()
 
-'''
-def text_objects(text, font):
-    textSurf = font.render(text, True, colour_black)
-    return textSurf, textSurf.get_rect()
-
-
-def m_display(text):
-    Text = pygame.font.Font('freesansbold.ttf', 50)
-    TextS, TextR = text_objects(text, Text)
-    TextR.center = ((gameParams.getWight() / 2), (gameParams.getHeight() / 2))
-    gameDisplay.blit(TextS, TextR)
-    pygame.display.update()
-    time.sleep(3)
-    game()
-
-
-def destroy():
-    m_display('Your spaceship destroyed!')
-'''
-
 x = (gameParams.getWidth() * 0.45)
 y = (gameParams.getHeight() * 0.8)
 player = SpaceShip(x, y, pygame, gameDisplay, gameParams)
@@ -131,7 +92,6 @@ contentManager = ContentManager()
 contentManager.setContents(firstStage.loadStageContent())
 painter = Painter(time.time(), contentManager.getContent())
 start_screen()
-camera = Camera()
 while running:
     for event in pygame.event.get():
         gameDisplay.fill(colour_white)
@@ -141,11 +101,6 @@ while running:
             player.update(event.type, event.key)
         if event.type == pygame.KEYUP:
             player.update(event.type, event.key)
-    camera.update(player)
-    '''
-    for sprite in all_sprites:
-        camera.apply(sprite)
-     '''
     fon.draw(gameDisplay)
     player.changeCoord(player.x_c, player.y_c)
     player.display((player.get_x(), player.get_y()))
