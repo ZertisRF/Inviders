@@ -26,9 +26,11 @@ class FirstStage:
         conduct = self.getConduct(conductName)
         return Content(enemy, conduct, time)
 
+
     def getEnemy(self, enemyName):
         if enemyName == 'Base_enemy':
             return Enemy_1(self.pygame, self.gameDisplay, self.gameParams)
+
 
     def getConduct(self, conductName):
         if conductName == 'Left_movement':
@@ -65,4 +67,3 @@ class FirstStage:
         trajectories = []
         trajectories.append(trajectory)
         return trajectories
-#git push --force

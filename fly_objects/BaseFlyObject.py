@@ -1,6 +1,8 @@
 """
 Создает базовый класс для всех летающих объектов
 """
+
+
 class BaseFlyObject:
     def __init__(self, x, y, pygame, gameDisplay, gameParams):
         self.x = x
