@@ -101,11 +101,12 @@ while running:
         if event.type == pygame.KEYUP:
             player.update(event.type, event.key)
     fon.draw(gameDisplay)
+    weapon_group.update()
     weapon_group.draw(gameDisplay)
     player.changeCoord(player.x_c, player.y_c)
     player.display((player.get_x(), player.get_y()))
     painter.draw(time.time())
     contentManager.clearContent()
-    pygame.display.update()
+    pygame.display.flip()
     clock.tick(60)
 pygame.quit()

@@ -26,7 +26,7 @@ class Weapon(pygame.sprite.Sprite):
         self.rect = pygame.Rect(x, y, 30, 30)
         self.x = x
         self.y = y
-        self.vy = 20
+        self.vy = 5
 
     def update(self):
         self.y -= self.vy
