@@ -1,7 +1,5 @@
-import pygame
 import time
 import sys
-import os
 
 from GameParams import GameParams
 from fly_objects.SpaceShip import *
@@ -106,6 +104,7 @@ while running:
     player.changeCoord(player.x_c, player.y_c)
     player.display((player.get_x(), player.get_y()))
     painter.draw(time.time())
+    contentManager.analize()
     contentManager.clearContent()
     pygame.display.flip()
     clock.tick(60)

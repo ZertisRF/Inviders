@@ -11,8 +11,8 @@ class BaseFlyObject:
         self.gameDisplay = gameDisplay
         self.gameParams = gameParams
         self.image = None
-        self.wight = None
-        self.height = None
+        self.wight = 0
+        self.height = 0
         self.type = None
 
     def update(self, x, y):
@@ -43,3 +43,9 @@ class BaseFlyObject:
 
     def getType(self):
         return self.type
+
+    def crashAction(self, strength):
+        pass
+
+    def getCrashStranges(self):
+        return None

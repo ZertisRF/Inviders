@@ -19,6 +19,10 @@ class FirstStage:
             contents.append(self.getContent('Base_enemy', 'Left_movement', i))
         for i in range(2, 32, 5):
             contents.append(self.getContent('Base_enemy', 'Right_movement', i))
+        for i in range(4, 35, 5):
+            contents.append(self.getContent('Base_enemy', 'Left_movement', i))
+        for i in range(3, 32, 5):
+            contents.append(self.getContent('Base_enemy', 'Right_movement', i))
         return contents
 
     def getContent(self, enemyName, conductName, time):
