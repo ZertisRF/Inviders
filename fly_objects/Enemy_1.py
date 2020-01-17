@@ -32,6 +32,19 @@ class Enemy_1(BaseFlyObject):
         self.type = 'enemy'
         self.wight = 50
         self.height = 50
+        self.life = 100
 
     def boom(self):
         self.image = load_image('boom', -1)
+
+    def desroyed(self):
+        return self.life <= 0
+
+    def crashAction(self, strenght):
+        self.life -= strenght
+
+    def getCrashStranges(self):
+        return 50
+
+    def getSize(self):
+        return self.wight, self.height

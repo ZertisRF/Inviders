@@ -37,8 +37,9 @@ class SpaceShip(BaseFlyObject):
         self.type = 'friend'
         self.wight = 70
         self.height = 70
+        self.life = 100
 
-    def checkDestroy(self):
+    def desroyed(self):
         return self.life <= 0
 
     def changeCoord(self, x_c, y_c):
@@ -85,3 +86,9 @@ class SpaceShip(BaseFlyObject):
         if type == pygame.KEYUP:
             self.x_c = 0
             self.y_c = 0
+
+    def crashAction(self, strenght):
+        self.life -= strenght
+
+    def getCrashStranges(self):
+        return 50
