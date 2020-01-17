@@ -1,5 +1,3 @@
-from fly_objects.Weapon import weapon_group
-
 class ContentManager:
     def __init__(self):
         self.content = {}
@@ -50,7 +48,8 @@ class ContentManager:
                 return False
 
     def update(self):
-        for item in weapon_group:
+        pass
+        #for item in weapon_group:
             #if self.checkCrossedContent(*, *):  что указать в скобках?
                 # здесь должна вызываться функция взрыва (Enemy_1.boom()) для врага и добавляться очки игроку
 

@@ -1,27 +1,13 @@
 import pygame
 import time
-import os
 import sys
+import os
 
 from GameParams import GameParams
-from fly_objects.SpaceShip import SpaceShip
+from fly_objects.SpaceShip import *
 from painter.Painter import Painter
 from contents.pilot.FirstStage import FirstStage
 from contents.ContentManager import ContentManager
-
-pygame.init()
-gameParams = GameParams()
-gameParams.setHeight(600)
-gameParams.setWidth(800)
-colour_black = (0, 0, 0)
-colour_white = (255, 255, 255)
-colour_red = (255, 0, 0)
-gameDisplay = pygame.display.set_mode((gameParams.getWidth(), gameParams.getHeight()))
-pygame.display.set_caption('Space_Race')
-clock = pygame.time.Clock()
-space_w = 50
-width, height = 800, 600
-FPS = 50
 
 
 def load_image(name, color_key=None):
@@ -39,6 +25,21 @@ def load_image(name, color_key=None):
     else:
         image = image.convert_alpha()
     return image
+
+
+pygame.init()
+gameParams = GameParams()
+gameParams.setHeight(600)
+gameParams.setWidth(800)
+colour_black = (0, 0, 0)
+colour_white = (255, 255, 255)
+colour_red = (255, 0, 0)
+gameDisplay = pygame.display.set_mode((gameParams.getWidth(), gameParams.getHeight()))
+pygame.display.set_caption('Space_Race')
+clock = pygame.time.Clock()
+space_w = 50
+width, height = 800, 600
+FPS = 50
 
 
 def terminate():
@@ -80,8 +81,6 @@ background.rect = background.image.get_rect()
 background.rect.x = 0
 background.rect.y = 0
 fon.add(background)
-all_sprites = pygame.sprite.Group()
-weapon_group = pygame.sprite.Group()
 
 x = (gameParams.getWidth() * 0.45)
 y = (gameParams.getHeight() * 0.8)
@@ -102,6 +101,7 @@ while running:
         if event.type == pygame.KEYUP:
             player.update(event.type, event.key)
     fon.draw(gameDisplay)
+    weapon_group.draw(gameDisplay)
     player.changeCoord(player.x_c, player.y_c)
     player.display((player.get_x(), player.get_y()))
     painter.draw(time.time())
