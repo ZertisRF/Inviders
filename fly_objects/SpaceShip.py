@@ -4,7 +4,6 @@
 import os
 import pygame
 from fly_objects.BaseFlyObject import BaseFlyObject
-from fly_objects.Weapon import Weapon
 width, height = 800, 600
 weapon_group = pygame.sprite.Group()
 
@@ -68,9 +67,6 @@ class SpaceShip(BaseFlyObject):
         elif self.x >= 0:
             self.x += 10
 
-    def shoot(self):
-        Weapon(self.x + 20, self.y - 20, weapon_group)
-
     def update(self, type, key):
         if type == pygame.KEYDOWN:
             if key == pygame.K_LEFT:
@@ -81,8 +77,6 @@ class SpaceShip(BaseFlyObject):
                 self.y_c -= 5
             if key == pygame.K_DOWN:
                 self.y_c += 5
-            if key == pygame.K_SPACE:
-                self.shoot()
         if type == pygame.KEYUP:
             self.x_c = 0
             self.y_c = 0

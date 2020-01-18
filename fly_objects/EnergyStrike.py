@@ -1,7 +1,3 @@
-'''
-Класс, хранящий в себе информацию о противнике
-'''
-
 from fly_objects.BaseFlyObject import BaseFlyObject
 import os
 import pygame
@@ -22,29 +18,26 @@ def load_image(name, color_key=None):
         image = image.convert_alpha()
     return image
 
-
-class Enemy_1(BaseFlyObject):
+class EnergyStrike(BaseFlyObject):
     def __init__(self, pygame, gameDisplay, gameParams):
-        super().__init__(None, None, pygame, gameDisplay, gameParams)
-        self.image = load_image('enemy.png', -1)
-        self.image = pygame.transform.scale(self.image, (50, 50))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.type = 'enemy'
-        self.wight = 40
-        self.height = 40
-        self.life = 1
-
-    def boom(self):
-        self.image = load_image('boom', -1)
+            super().__init__(None, None, pygame, gameDisplay, gameParams)
+            self.image = load_image('ball.png', -1)
+            self.image = pygame.transform.scale(self.image, (50, 50))
+            self.mask = pygame.mask.from_surface(self.image)
+            self.type = 'enemy'
+            self.wight = 10
+            self.height = 10
+            self.life = 1
+            self.type = 'friend'
 
     def desroyed(self):
         return self.life <= 0
+
+    def getSize(self):
+        return self.wight, self.height
 
     def crashAction(self, strenght):
         self.life -= strenght
 
     def getCrashStranges(self):
-        return 100
-
-    def getSize(self):
-        return self.wight, self.height
+        return 50

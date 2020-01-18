@@ -51,6 +51,7 @@ class ContentManager:
         else:
             return False
 
+
     def analize(self):
         contents = [x for x in self.getContent().values()]
         for i in range(len(contents) - 1):

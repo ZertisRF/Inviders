@@ -71,3 +71,17 @@ class FirstStage:
         trajectories = []
         trajectories.append(trajectory)
         return trajectories
+
+    def getUpTrajectory(self, coords):
+        lineM = LineMovement(270, 800)
+        movements = []
+        movements.append(lineM)
+        trajectory = Trajectory(self.gameParams, movements, coords, incr=10)
+        trajectories = []
+        trajectories.append(trajectory)
+        return trajectories
+
+    def getShootConduct(self, coords):
+        trajectory = self.getUpTrajectory(coords)
+        conduct = Conduct(trajectory)
+        return conduct

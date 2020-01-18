@@ -6,6 +6,8 @@ from fly_objects.SpaceShip import *
 from painter.Painter import Painter
 from contents.pilot.FirstStage import FirstStage
 from contents.ContentManager import ContentManager
+from contents.Content import Content
+from fly_objects.EnergyStrike import EnergyStrike
 
 
 def load_image(name, color_key=None):
@@ -89,6 +91,12 @@ contentManager = ContentManager()
 contentManager.setContents(firstStage.loadStageContent())
 painter = Painter(time.time(), contentManager.getContent())
 start_screen()
+
+def getShootContent(player):
+    strike = EnergyStrike(pygame, gameDisplay, gameParams)
+    shootContent = Content(strike, firstStage.getShootConduct((player.get_x(), player.get_y())), 1)
+    return [shootContent]
+
 while running:
     for event in pygame.event.get():
         gameDisplay.fill(colour_white)
@@ -96,6 +104,8 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             player.update(event.type, event.key)
+            if event.key == pygame.K_SPACE:
+                contentManager.setContents(getShootContent(player))
         if event.type == pygame.KEYUP:
             player.update(event.type, event.key)
     fon.draw(gameDisplay)
